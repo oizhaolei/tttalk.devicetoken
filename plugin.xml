@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+   <class>org.tttalk.openfire.plugin.DeviceTokenPlugin</class>
+   <name>TTTalk Device Token</name>
+   <description>Reigster and unregister OF_users to TTTalk openfire_devices table.</description>
+   <author>tttalk.org</author>
+   <version>1.0.0</version>
+   <date>01/29/2015</date>
+   <minServerVersion>3.9.0</minServerVersion>
+
+   <adminconsole>
+      <tab id="tab-users">
+         <sidebar id="sidebar-users">
+            <item id="devicetoken-form" name="Device Token" url="devicetoken-form.jsp" description="Setting Url for device token" />
+         </sidebar>
+      </tab>
+   </adminconsole>
+</plugin>
