@@ -24,8 +24,7 @@ public class DeviceTokenPlugin implements Plugin {
 
 	@Override
 	public void initializePlugin(PluginManager manager, File pluginDirectory) {
-		new JID(XMPPServer.getInstance().getServerInfo()
-				.getXMPPDomain());
+		new JID(XMPPServer.getInstance().getServerInfo().getXMPPDomain());
 		XMPPServer.getInstance().getMessageRouter();
 
 		SessionEventDispatcher.addListener(listener);
@@ -57,14 +56,16 @@ public class DeviceTokenPlugin implements Plugin {
 	private class MotDSessionEventListener implements SessionEventListener {
 		@Override
 		public void sessionCreated(Session session) {
-			log.info("sessionCreated=" + session.getAddress().toString());
-			registerOpenfirePushOnServer(session);
+			String address = session.getAddress().toString();
+			log.info("sessionCreated: " + address);
+			online(address);
 		}
 
 		@Override
 		public void sessionDestroyed(Session session) {
-			log.info("sessionDestroyed=" + session.getAddress().toString());
-			unregisterOpenfirePushOnServer(session);
+			String address = session.getAddress().toString();
+			log.info("sessionDestroyed: " + address);
+			offline(address);
 		}
 
 		@Override
@@ -83,8 +84,7 @@ public class DeviceTokenPlugin implements Plugin {
 		}
 	}
 
-	private String registerOpenfirePushOnServer(Session session) {
-		String address = session.getAddress().toString();
+	private String online(String address) {
 
 		String appname = Utils.getAppName(address);
 		String clientid = Utils.getClientId(address);
@@ -99,10 +99,9 @@ public class DeviceTokenPlugin implements Plugin {
 		return Utils.get(Utils.getDeviceTokenUrl(), params);
 	}
 
-	private String unregisterOpenfirePushOnServer(Session session) {
-		String address = session.getAddress().toString();
+	private String offline(String address) {
 		Map<String, String> params = new HashMap<>();
-		params.put("task", "unregister");
+		params.put("task", "offline");
 		params.put("devicetoken", address);
 
 		params = Utils.genParams(Utils.getClientId(address), params);
