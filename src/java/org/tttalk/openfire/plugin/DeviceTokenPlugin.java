@@ -20,7 +20,7 @@ public class DeviceTokenPlugin implements Plugin {
 	private static final Logger log = LoggerFactory
 			.getLogger(DeviceTokenPlugin.class);
 
-	private MotDSessionEventListener listener = new MotDSessionEventListener();
+	private LoginSessionEventListener listener = new LoginSessionEventListener();
 
 	@Override
 	public void initializePlugin(PluginManager manager, File pluginDirectory) {
@@ -53,7 +53,7 @@ public class DeviceTokenPlugin implements Plugin {
 		Utils.setAppSecret(secret);
 	}
 
-	private class MotDSessionEventListener implements SessionEventListener {
+	private class LoginSessionEventListener implements SessionEventListener {
 		@Override
 		public void sessionCreated(Session session) {
 			String address = session.getAddress().toString();
