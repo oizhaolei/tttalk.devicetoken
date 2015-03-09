@@ -58,14 +58,18 @@ public class DeviceTokenPlugin implements Plugin {
 		public void sessionCreated(Session session) {
 			String address = session.getAddress().toString();
 			log.info("sessionCreated: " + address);
-			online(address);
+			if (Utils.isValidUser(address)) {
+				online(address);
+			}
 		}
 
 		@Override
 		public void sessionDestroyed(Session session) {
 			String address = session.getAddress().toString();
 			log.info("sessionDestroyed: " + address);
-			offline(address);
+			if (Utils.isValidUser(address)) {
+				offline(address);
+			}
 		}
 
 		@Override

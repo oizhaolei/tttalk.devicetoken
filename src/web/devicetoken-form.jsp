@@ -39,7 +39,7 @@
 	</head>
 	<body>
 
-<form action="devicetoken-form.jsp?save" method="post">
+<form action="devicetoken-form.jsp?save=true" method="post">
 
 <div class="jive-contentBoxHeader">Enter the TTTalk url(openfire_devices.php) to register/unregister OF_users</div>
 <div class="jive-contentBox">

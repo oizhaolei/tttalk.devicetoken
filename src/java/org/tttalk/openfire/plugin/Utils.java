@@ -141,6 +141,11 @@ public class Utils {
 				.substring(address.indexOf("_") + 1, address.indexOf("@"));
 	}
 
+	public static boolean isValidUser(String address) {
+		return address.startsWith("chinatalk_")
+				|| address.startsWith("volunteer_");
+	}
+
 	public static String getAppName(String address) {
 		return address.substring(0, address.indexOf("_"));
 	}

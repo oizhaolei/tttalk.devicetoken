@@ -11,7 +11,7 @@
 	<minServerVersion>3.9.0</minServerVersion>
 
 	<adminconsole>
-		<tab id="tab-plugins">
+		<tab id="tab-users">
 			<sidebar id="tttalk" name="TTTalk">
 				<item id="devicetoken-form" name="Device Token" url="devicetoken-form.jsp"
 					description="Setting Url for device token" />
