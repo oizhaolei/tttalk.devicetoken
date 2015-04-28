@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 public class Utils {
 	private static final Logger log = LoggerFactory.getLogger(Utils.class);
@@ -110,11 +111,14 @@ public class Utils {
 	}
 
 	public static String get(String url, Map<String, String> params) {
-		url += "?" + Utils.encodeParameters(params);
+		String body = "";
+		try {
+			url += "?" + Utils.encodeParameters(params);
 
-		log.info("get request=" + url);
-		String body = HttpRequest.get(url).body();
-		log.info("get response=" + body);
+			body = HttpRequest.get(url).body();
+		} catch (HttpRequestException e) {
+			log.info("HttpRequestException: " + url);
+		}
 		return body;
 	}
 
