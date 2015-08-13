@@ -128,7 +128,7 @@ public class Utils {
 
 	public static String getDeviceTokenUrl() {
 		return JiveGlobals.getProperty(TTTALK_DEVICE_URL,
-				"http://ctalk/tttalk.web/v3/openfire_devices.php");
+				"http://ctalk2/tttalk.web/v3.1/openfire_devices.php");
 	}
 
 	public static void setAppSecret(String secret) {
