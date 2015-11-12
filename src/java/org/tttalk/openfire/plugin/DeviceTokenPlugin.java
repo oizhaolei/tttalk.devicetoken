@@ -1,6 +1,8 @@
 package org.tttalk.openfire.plugin;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jivesoftware.openfire.XMPPServer;
 import org.jivesoftware.openfire.container.Plugin;
@@ -87,13 +89,28 @@ public class DeviceTokenPlugin implements Plugin {
   }
 
   private void online(String address) {
-    Thread thread = new OnlineThread(address);
-    thread.start();
+		log.info("online start: " + address);
+		String appname = Utils.getAppName(address);
+		String clientid = Utils.getClientId(address);
+		Map<String, String> params = new HashMap<>();
+		params.put("task", "online");
+		params.put("devicetoken", address);
+		params.put("clientid", clientid);
+		params.put("appname", appname);
+
+		params = Utils.genParams(clientid, params);
+
+		Utils.get(Utils.getDeviceTokenUrl(), params);
   }
 
   private void offline(String address) {
-    Thread thread = new OfflineThread(address);
-    thread.start();
+		Map<String, String> params = new HashMap<>();
+		params.put("task", "offline");
+		params.put("devicetoken", address);
+
+		params = Utils.genParams(Utils.getClientId(address), params);
+
+		Utils.get(Utils.getDeviceTokenUrl(), params);
   }
 
 }

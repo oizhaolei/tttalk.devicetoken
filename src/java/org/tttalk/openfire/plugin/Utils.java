@@ -117,7 +117,7 @@ public class Utils {
 
 			body = HttpRequest.get(url).body();
 		} catch (HttpRequestException e) {
-			log.info("HttpRequestException: " + url);
+			log.error("HttpRequestException: " + url, e);
 		}
 		return body;
 	}
